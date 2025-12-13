@@ -1,16 +1,14 @@
-# go_go
+![1](https://github.com/user-attachments/assets/2c6d2877-0039-42e3-a32b-aa63697d0c05)# go_go
+📱 Multi-Vendor Marketplace Mobile App (Flutter)
+A full-stack mobile marketplace application supporting Customers, Vendors, and Delivery Drivers.
+Built with Flutter + GetX, connected to a Laravel backend, and optimized for high performance and scalability.
 
-A new Flutter project.
+🎥 Demo Video
+on YouTube
+https://youtu.be/1oFZPN4LnUE?si=XF4poRwQ806pAIlM
+on Drive
+https://drive.google.com/file/d/19ojP3N2UnNZu6aoJSb02g60NpmL1GLmB/view?usp=drivesdk
 
-## Getting Started
+📸 Screenshots
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
