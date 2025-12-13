@@ -22,7 +22,7 @@ https://drive.google.com/file/d/19ojP3N2UnNZu6aoJSb02g60NpmL1GLmB/view?usp=drive
 ![7](https://github.com/user-attachments/assets/54f3f16e-8418-4591-a27b-5b3d4c46705c)
 ![8](https://github.com/user-attachments/assets/ae993338-1868-40d6-ba44-3201dbb898c6)
 ![9](https://github.com/user-attachments/assets/777d221a-1851-4122-b7d4-4f7dfb5136a7)
-![10](https://github.com/user-attachments/assets/0f512acd-83df-4aea-ad6e-2c0decd39502)
+![10](https://github.com/user-attachments/assets/30557aa5-6462-4c23-92e5-a4e60ad8bb38)
 ![11](https://github.com/user-attachments/assets/05edc325-726c-46ca-9e96-57321a122b34)
 ![12](https://github.com/user-attachments/assets/3475e05e-fa50-4c88-b713-0b9774bbe895)
 ![13](https://github.com/user-attachments/assets/88d20b17-4b88-4bce-b49d-57121f51e2a1)
@@ -37,67 +37,45 @@ https://drive.google.com/file/d/19ojP3N2UnNZu6aoJSb02g60NpmL1GLmB/view?usp=drive
 
 
 🚀 Features
-👤 User Features (Customer App)
 
+👤 User Features (Customer App)
 Modern Home UI with sliders, categories
 Product & Store pages with full details
-
 Add to cart, checkout, and online payment (Stripe)
-
 Smart order tracking
 (Preparing → On the way → Delivered)
-
 Push notifications for offers, order updates, and messages
-
 Manage addresses and profile
-
 Multi-language support
 
 🏪 Vendor Features
-
 Includes all User features, plus:
-
 Manage store profile
-
 Add / edit / delete products
 
 
 🚚 Delivery Driver Features
-
 Includes all User features, plus:
-
 Receive assigned delivery orders
-
 Real-time order status updates
-
 View delivery history
+
 
 🔐 Authentication
 
 Secure login & registration flow
-
 Email verification
-
 Forgot password & reset password
-
 Token-based authentication (Laravel Sanctum)
-
 Auto-login & session persistence
-
 Logout & token revocation
 
 🧰 Tech Stack
-
 MVC Architecture
-
 GetX (State Management & Routing)
-
 RESTful API
-
 Firebase Cloud Messaging
-
 Localization (Multi-language)
-
 Online Payments (Stripe)
 
 
