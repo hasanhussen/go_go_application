@@ -139,58 +139,6 @@ class CheckoutScreen extends StatelessWidget {
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
-
-                                        // أزرار Edit/Delete
-                                        // if (controller.fromOrder &&
-                                        //     controller.pendingOrder) ...[
-                                        //   if (controller.cartItems[index].meal!
-                                        //           .isActive ==
-                                        //       1)
-                                        //     IconButton(
-                                        //       padding: EdgeInsets.zero,
-                                        //       constraints: const BoxConstraints(),
-                                        //       onPressed: () {
-                                        //         controller.gotoEdit(
-                                        //           controller
-                                        //               .cartItems[index].mealId!,
-                                        //           controller.cartItems[index].id!,
-                                        //           controller
-                                        //               .cartItems[index].quantity!,
-                                        //           controller.cartItems[index]
-                                        //               .additionalItems!,
-                                        //           controller.cartItems[index],
-                                        //           controller
-                                        //               .cartItems[index].variantId,
-                                        //         );
-                                        //       },
-                                        //       icon: const Icon(
-                                        //           Icons.edit_outlined,
-                                        //           size: 18),
-                                        //     ),
-                                        //   IconButton(
-                                        //     padding: EdgeInsets.zero,
-                                        //     constraints: const BoxConstraints(),
-                                        //     onPressed: () {
-                                        //       Get.defaultDialog(
-                                        //         title: "تأكيد الحذف",
-                                        //         middleText:
-                                        //             "هل تريد حذف هذا المنتج من طلبك؟",
-                                        //         textCancel: "إلغاء",
-                                        //         textConfirm: "حذف",
-                                        //         confirmTextColor: Colors.white,
-                                        //         buttonColor: Colors.red,
-                                        //         onConfirm: () {
-                                        //           controller.deletorderItem(
-                                        //             controller.cartItems[index].id
-                                        //                 .toString(),
-                                        //           );
-                                        //         },
-                                        //       );
-                                        //     },
-                                        //     icon: const Icon(Icons.delete_outline,
-                                        //         size: 18, color: Colors.red),
-                                        //   ),
-                                        // ],
                                       ],
                                     ),
 
