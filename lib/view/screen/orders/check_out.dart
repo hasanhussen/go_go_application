@@ -511,11 +511,11 @@ class CheckoutScreen extends StatelessWidget {
                                 () {
                               controller.editCoupon();
                             }, canEdit: true),
-                          if (controller.couponname != null)
-                            _buildRow(
-                                "الخصم",
-                                "-\$${controller.discount!.toStringAsFixed(2)}",
-                                () {}),
+                          // if (controller.couponname != null)
+                          //   _buildRow(
+                          //       "الخصم",
+                          //       "-\$${controller.discount!.toStringAsFixed(2)}",
+                          //       () {}),
                           _buildRow(
                               "طريقة الدفع", "-\$${controller.paymentMethod!}",
                               () {
