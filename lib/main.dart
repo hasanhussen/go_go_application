@@ -8,17 +8,25 @@ import 'package:go_go/core/services/services.dart';
 import 'package:go_go/routes.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init();
-  //await Firebase.initializeApp();
-  await initialServices();
-  runApp(MyApp());
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    await GetStorage.init();
+    await initialServices();
+    runApp(MyApp());
+  } catch (e) {
+    print("Critical Initialization Error: $e");
+    runApp(MaterialApp(
+        home: Scaffold(body: Center(child: Text("Error launching app")))));
+  }
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // استدعاء الكنترولر المسؤول عن اللغة والثيم
     LocaleController controller = Get.put(LocaleController());
+
     return GetMaterialApp(
       translations: MyTranslation(),
       debugShowCheckedModeBanner: false,
@@ -26,8 +34,7 @@ class MyApp extends StatelessWidget {
       locale: controller.language,
       theme: controller.appTheme,
       initialBinding: InitialBindings(),
-      // routes: routes,
-      getPages: routes,
+      getPages: routes, // تأكد أن routes تحتوي على صفحة البداية بشكل صحيح
     );
   }
 }

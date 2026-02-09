@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
@@ -14,64 +13,83 @@ class MyServices extends GetxService {
   String status = "";
 
   Future<MyServices> init() async {
+    // 1. تهيئة Firebase و SharedPreferences (أشياء سريعة وضرورية)
     await Firebase.initializeApp();
     sharedPreferences = await SharedPreferences.getInstance();
-    await gettoken();
-    if (token != "") {
-      await getStatus();
-    }
-    await getStripe();
+    
+    gettoken();
+
+    // 2. استدعاء جلب البيانات من السيرفر "بدون await" 
+    // لكي لا يظل التطبيق عالقاً على شاشة سوداء إذا تأخر السيرفر
+    checkApiData(); 
+
     return this;
   }
 
-  gettoken() {
+  void gettoken() {
     token = sharedPreferences.getString("token") ?? "";
+    // تنظيف أي بيانات مؤقتة قديمة
     sharedPreferences.remove('pendingOrderId');
   }
 
-  getStatus() async {
-    final response = await http.get(
-      Uri.parse("${AppLink.server}/profile"),
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-      },
-    );
-
-    if (response.statusCode == 200) {
-      final body = json.decode(response.body);
-      status = body['status'];
-      if (body['email_verified_at'] == null) {
-        status = '4';
+  // دالة تجمع طلبات الشبكة وتنفذها في الخلفية
+  void checkApiData() async {
+    try {
+      if (token.isNotEmpty) {
+        await getStatus();
       }
-      if (body['deleted_at'] != null) {
-        status = '3';
-      }
-      sharedPreferences.setString("status", status);
-    } else {
-      throw Exception("فشل بجلب حالة المستخدم");
+      await getStripe();
+    } catch (e) {
+      print("Background Data Fetch Error: $e");
     }
   }
 
-  getStripe() async {
-    final response = await http.get(
-      Uri.parse("${AppLink.server}/getPublishableKey"),
-      headers: {
-        'Accept': 'application/json',
-      },
-    );
+  Future<void> getStatus() async {
+    try {
+      final response = await http.get(
+        Uri.parse("${AppLink.server}/profile"),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      ).timeout(const Duration(seconds: 10)); // مهلة 10 ثوانٍ فقط
 
-    if (response.statusCode == 200) {
-      final body = json.decode(response.body);
-      Stripe.publishableKey = body['publishable_key'];
-      publishableKey = Stripe.publishableKey;
-      await Stripe.instance.applySettings();
-    } else {
-      throw Exception("فشل بجلب Stripe publishable key");
+      if (response.statusCode == 200) {
+        final body = json.decode(response.body);
+        status = body['status'].toString();
+        
+        if (body['email_verified_at'] == null) status = '4';
+        if (body['deleted_at'] != null) status = '3';
+        
+        await sharedPreferences.setString("status", status);
+      } else {
+        status = "error_auth";
+      }
+    } catch (e) {
+      status = "offline";
+    }
+  }
+
+  Future<void> getStripe() async {
+    try {
+      final response = await http.get(
+        Uri.parse("${AppLink.server}/getPublishableKey"),
+        headers: {'Accept': 'application/json'},
+      ).timeout(const Duration(seconds: 10));
+
+      if (response.statusCode == 200) {
+        final body = json.decode(response.body);
+        Stripe.publishableKey = body['publishable_key'];
+        publishableKey = Stripe.publishableKey;
+        await Stripe.instance.applySettings();
+      }
+    } catch (e) {
+      print("Stripe Error: $e");
     }
   }
 }
 
+// دالة التشغيل التي يتم استدعاؤها في الـ main
 initialServices() async {
   await Get.putAsync(() => MyServices().init());
 }

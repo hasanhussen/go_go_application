@@ -50,35 +50,42 @@ class OrderModel {
       this.calculatedtotalprice});
 
   OrderModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    userId = json['user_id'];
-    address = json['address'];
-    status = json['status'];
-    notes = json['notes'];
-    x = json['x'];
-    y = json['y'];
-    price = json['price'];
-    deliveryPrice = json['delivery_price'];
-    couponId = json['coupon_id'];
-    discount = json['discount'];
-    totalPrice = json['total_price'];
-    paymentMethod = json['payment_method'];
-    isPaid = json['is_paid'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    deletedAt = json['deleted_at'];
-    deleteReason = json['delete_reason'];
+    id = _toInt(json['id']);
+    userId = _toInt(json['user_id']);
+    address = json['address']?.toString();
+    status = json['status']?.toString();
+    notes = json['notes']?.toString();
+    x = json['x']?.toString();
+    y = json['y']?.toString();
+
+    // تأمين الأسعار النصية في حال جاءت كأرقام من السيرفر
+    price = json['price']?.toString();
+    deliveryPrice = json['delivery_price']?.toString();
+    totalPrice = json['total_price']?.toString();
+    calculatedtotalprice = json['calculated_total_price']?.toString();
+
+    couponId = _toInt(json['coupon_id']);
+    discount = _toInt(json['discount']);
+    paymentMethod = json['payment_method']?.toString();
+    isPaid = json['is_paid']?.toString();
+    createdAt = json['created_at']?.toString();
+    updatedAt = json['updated_at']?.toString();
+    deletedAt = json['deleted_at']?.toString();
+    deleteReason = json['delete_reason']?.toString();
+
     if (json['carts'] != null) {
       carts = <CartModel>[];
       json['carts'].forEach((v) {
         carts!.add(new CartModel.fromJson(v));
       });
     }
+
     coupon = json['coupon'] != null
         ? new CouponModel.fromJson(json['coupon'])
         : null;
-    oldCartCount = json['cart_count'] ?? 0;
-    calculatedtotalprice = json['calculated_total_price'].toString();
+
+    // تأمين عدد العناصر في السلة
+    oldCartCount = _toInt(json['cart_count']) ?? 0;
   }
 
   Map<String, dynamic> toJson() {
@@ -108,5 +115,13 @@ class OrderModel {
     data['cart_count'] = this.oldCartCount;
     data['calculated_total_price'] = this.calculatedtotalprice;
     return data;
+  }
+
+  int? _toInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    if (value is double) return value.toInt();
+    return null;
   }
 }

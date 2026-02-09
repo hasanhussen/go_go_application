@@ -48,84 +48,98 @@ class MealModel {
       this.store});
 
   MealModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    storeId = json['store_id'];
-    name = json['name'];
-    description = json['description'];
-    note = json['note'];
-    image = json['image'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    deletedAt = json['deleted_at'];
-    banReason = json['ban_reason'];
-    appeal = json['appeal'];
-    banUntil = json['ban_until'];
-    deleteReason = json['delete_reason'];
-    points = json['points'];
-    quantity = json['quantity'];
-    isActive = json['is_active'];
-    status = json['status'];
-    price = json['price'] != null
-        ? double.tryParse(json['price'].toString())
-        : null;
+    id = _toInt(json['id']);
+    storeId = _toInt(json['store_id']);
+    name = json['name']?.toString();
+    description = json['description']?.toString();
+    note = json['note']?.toString();
+    image = json['image']?.toString();
+    createdAt = json['created_at']?.toString();
+    updatedAt = json['updated_at']?.toString();
+    deletedAt = json['deleted_at']?.toString();
+    banReason = json['ban_reason']?.toString();
+    appeal = json['appeal']?.toString();
+    banUntil = json['ban_until']?.toString();
+    deleteReason = json['delete_reason']?.toString();
+    points = _toInt(json['points']);
+    quantity = _toInt(json['quantity']);
+    isActive = _toInt(json['is_active']);
+    status = json['status']?.toString();
+    price = _toDouble(json['price']);
 
+    // معالجة Additionals بذكاء (الحفاظ على منطق with_trashed)
     if (json.containsKey('additionals') && json['additionals'] != null) {
       additionals = <AdditionalsModel>[];
       json['additionals'].forEach((v) {
-        additionals!.add(new AdditionalsModel.fromJson(v));
+        additionals!.add(AdditionalsModel.fromJson(v));
       });
     } else if (json['additionals_with_trashed'] != null) {
       additionals = <AdditionalsModel>[];
       json['additionals_with_trashed'].forEach((v) {
-        additionals!.add(new AdditionalsModel.fromJson(v));
+        additionals!.add(AdditionalsModel.fromJson(v));
       });
     }
 
+    // معالجة Variants بذكاء
     if (json.containsKey('variants') && json['variants'] != null) {
       variants = <MealVariants>[];
       json['variants'].forEach((v) {
-        variants!.add(new MealVariants.fromJson(v));
+        variants!.add(MealVariants.fromJson(v));
       });
     } else if (json['variants_with_trashed'] != null) {
       variants = <MealVariants>[];
       json['variants_with_trashed'].forEach((v) {
-        variants!.add(new MealVariants.fromJson(v));
+        variants!.add(MealVariants.fromJson(v));
       });
     } else {
       variants = <MealVariants>[];
     }
 
-    store =
-        json['store'] != null ? new MyStoreModel.fromJson(json['store']) : null;
+    store = json['store'] != null ? MyStoreModel.fromJson(json['store']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['store_id'] = this.storeId;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['note'] = this.note;
-    data['image'] = this.image;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['deleted_at'] = this.deletedAt;
-    data['ban_reason'] = this.banReason;
-    data['appeal'] = this.appeal;
-    data['ban_until'] = this.banUntil;
-    data['delete_reason'] = this.deleteReason;
-    data['points'] = this.points;
-    data['quantity'] = this.quantity;
-    data['is_active'] = this.isActive;
-    data['status'] = this.status;
-    data['price'] = this.price;
-    if (this.additionals != null) {
-      data['additionals'] = this.additionals!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['store_id'] = storeId;
+    data['name'] = name;
+    data['description'] = description;
+    data['note'] = note;
+    data['image'] = image;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['deleted_at'] = deletedAt;
+    data['ban_reason'] = banReason;
+    data['appeal'] = appeal;
+    data['ban_until'] = banUntil;
+    data['delete_reason'] = deleteReason;
+    data['points'] = points;
+    data['quantity'] = quantity;
+    data['is_active'] = isActive;
+    data['status'] = status;
+    data['price'] = price;
+    if (additionals != null) {
+      data['additionals'] = additionals!.map((v) => v.toJson()).toList();
     }
-    if (this.variants != null) {
-      data['variants'] = this.variants!.map((v) => v.toJson()).toList();
+    if (variants != null) {
+      data['variants'] = variants!.map((v) => v.toJson()).toList();
     }
     return data;
+  }
+
+  int? _toInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    if (value is double) return value.toInt();
+    return null;
+  }
+
+  double? _toDouble(dynamic value) {
+    if (value == null) return null;
+    if (value is num) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
   }
 }
 
@@ -139,21 +153,35 @@ class MealVariants {
   MealVariants({this.id, this.name, this.price, this.quantity, this.deletedAt});
 
   MealVariants.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    price = json['price'] != null
-        ? double.tryParse(json['price'].toString())
-        : null;
-    quantity = json['quantity'];
-    deletedAt = json['deleted_at'];
+    id = _toInt(json['id']);
+    name = json['name']?.toString();
+    price = _toDouble(json['price']);
+    quantity = _toInt(json['quantity']);
+    deletedAt = json['deleted_at']?.toString();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['price'] = this.price;
-    data['quantity'] = this.quantity;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['price'] = price;
+    data['quantity'] = quantity;
     return data;
+  }
+
+  // أضفت الدوال هنا أيضاً لضمان استقلال الكلاس
+  int? _toInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    if (value is double) return value.toInt();
+    return null;
+  }
+
+  double? _toDouble(dynamic value) {
+    if (value == null) return null;
+    if (value is num) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
   }
 }

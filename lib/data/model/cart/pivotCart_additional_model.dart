@@ -17,26 +17,42 @@ class PivotcartAdditionalModel {
       this.updatedAt});
 
   PivotcartAdditionalModel.fromJson(Map<String, dynamic> json) {
-    cartId = json['cart_id'];
-    additionalId = json['additional_id'];
-    quantity = json['quantity'];
-    newquantity = json['newquantity'] ?? json['quantity'];
-    oldAdditionalPrice = json['old_additional_price'] != null
-        ? double.tryParse(json['old_additional_price'].toString())
-        : null;
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    cartId = _toInt(json['cart_id']);
+    additionalId = _toInt(json['additional_id']);
+    quantity = _toInt(json['quantity']);
+
+    // الحفاظ على منطق التحقق من newquantity أولاً ثم quantity
+    newquantity = json['newquantity'] != null
+        ? _toInt(json['newquantity'])
+        : _toInt(json['quantity']);
+
+    oldAdditionalPrice = _toDouble(json['old_additional_price']);
+
+    createdAt = json['created_at']?.toString();
+    updatedAt = json['updated_at']?.toString();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    //data['cart_id'] = this.cartId;
-    //data['additional_id'] = this.additionalId;
     data['quantity'] = this.quantity;
     data['newquantity'] = this.newquantity;
     data['old_additional_price'] = this.oldAdditionalPrice;
-    //data['created_at'] = this.createdAt;
-    //data['updated_at'] = this.updatedAt;
     return data;
+  }
+
+  // دوال التحويل الآمنة لضمان عدم حدوث Type Mismatch
+  int? _toInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    if (value is double) return value.toInt();
+    return null;
+  }
+
+  double? _toDouble(dynamic value) {
+    if (value == null) return null;
+    if (value is num) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
   }
 }

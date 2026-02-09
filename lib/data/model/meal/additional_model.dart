@@ -21,15 +21,13 @@ class AdditionalsModel {
       this.pivot});
 
   AdditionalsModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    price = json['price'] != null
-        ? double.tryParse(json['price'].toString())
-        : null;
-    quantity = json['quantity'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    deletedAt = json['deleted_at'];
+    id = _toInt(json['id']); // تحويل آمن
+    name = json['name']?.toString();
+    price = _toDouble(json['price']); // تحويل آمن
+    quantity = _toInt(json['quantity']); // تحويل آمن
+    createdAt = json['created_at']?.toString();
+    updatedAt = json['updated_at']?.toString();
+    deletedAt = json['deleted_at']?.toString();
     pivot = json['pivot'] != null
         ? PivotcartAdditionalModel.fromJson(json['pivot'])
         : null;
@@ -38,14 +36,25 @@ class AdditionalsModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    //data['name'] = this.name;
-    //data['price'] = this.price;
-    // data['created_at'] = this.createdAt;
-    // data['updated_at'] = this.updatedAt;
-    // data['deleted_at'] = this.deletedAt;
     if (this.pivot != null) {
       data['pivot'] = this.pivot!.toJson();
     }
     return data;
+  }
+
+  // دوال التحويل لضمان استقرار الأنواع
+  int? _toInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    if (value is double) return value.toInt();
+    return null;
+  }
+
+  double? _toDouble(dynamic value) {
+    if (value == null) return null;
+    if (value is num) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
   }
 }

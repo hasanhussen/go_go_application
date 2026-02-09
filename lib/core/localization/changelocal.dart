@@ -42,23 +42,38 @@ class LocaleController extends GetxController {
   //   }
   // }
 
-  @override
-  void onInit() {
-    requestPermissionNotification();
-    fcmconfig();
-    requestPermissions();
-    String? sharedPrefLang = myServices.sharedPreferences.getString("lang");
-    if (sharedPrefLang == "ar") {
-      language = const Locale("ar");
-      appTheme = themeArabic;
-    } else if (sharedPrefLang == "en") {
-      language = const Locale("en");
-      appTheme = themeEnglish;
-    } else {
-      language = Locale(Get.deviceLocale!.languageCode);
-      appTheme =
-          Get.deviceLocale!.languageCode == "ar" ? themeArabic : themeEnglish;
+ @override
+void onInit() {
+  requestPermissionNotification();
+  fcmconfig();
+  requestPermissions();
+
+  String? sharedPrefLang = myServices.sharedPreferences.getString("lang");
+
+  // اللغات المدعومة فقط
+  const supportedLangs = ["ar", "en"];
+
+  if (sharedPrefLang != null && supportedLangs.contains(sharedPrefLang)) {
+    // لغة محفوظة وصحيحة
+    language = Locale(sharedPrefLang);
+    appTheme = sharedPrefLang == "ar" ? themeArabic : themeEnglish;
+  } else {
+    // لغة الجهاز
+    String deviceLang = Get.deviceLocale?.languageCode ?? "en";
+
+    // إذا مو مدعومة → إنكليزي افتراضي
+    if (!supportedLangs.contains(deviceLang)) {
+      deviceLang = "en";
     }
-    super.onInit();
+
+    language = Locale(deviceLang);
+    appTheme = deviceLang == "ar" ? themeArabic : themeEnglish;
+
+    // حفظها للمرة القادمة
+    myServices.sharedPreferences.setString("lang", deviceLang);
   }
+
+  super.onInit();
+}
+
 }

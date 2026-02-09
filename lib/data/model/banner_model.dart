@@ -15,22 +15,31 @@ class BannerModel {
       this.updatedAt});
 
   BannerModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    slidertitle = json['slider_title'];
-    image = json['image'];
-    deletedAt = json['deleted_at'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    id = _toInt(json['id']); // تحويل آمن للـ id
+    slidertitle = json['slider_title']?.toString();
+    image = json['image']?.toString();
+    deletedAt = json['deleted_at']?.toString();
+    createdAt = json['created_at']?.toString();
+    updatedAt = json['updated_at']?.toString();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['slider_title'] = this.slidertitle;
-    data['image'] = this.image;
-    data['deleted_at'] = this.deletedAt;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['slider_title'] = slidertitle;
+    data['image'] = image;
+    data['deleted_at'] = deletedAt;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
+  }
+
+  // دوال التحويل الآمنة
+  int? _toInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    if (value is double) return value.toInt();
+    return null;
   }
 }

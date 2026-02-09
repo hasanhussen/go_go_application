@@ -1,6 +1,5 @@
 import 'package:go_go/data/model/meal/additional_model.dart';
 import 'package:go_go/data/model/meal/meal_model.dart';
-import 'package:go_go/data/model/my_store_model.dart';
 import 'package:go_go/data/model/order_model.dart';
 
 class CartModel {
@@ -41,34 +40,37 @@ class CartModel {
       this.variant});
 
   CartModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    mealId = json['meal_id'];
-    userId = json['user_id'];
-    quantity = json['quantity'];
-    newquantity = json['newquantity'] ?? json['quantity'];
-    oldMealPrice = json['old_meal_price'] != null
-        ? double.tryParse(json['old_meal_price'].toString())
-        : null;
-    price = json['price'] != null
-        ? double.tryParse(json['price'].toString())
-        : null;
-    oldPrice = json['old_price'] != null
-        ? double.tryParse(json['old_price'].toString())
-        : null;
+    // استخدام _toInt للحقول الرقمية الصحيحة
+    id = _toInt(json['id']);
+    mealId = _toInt(json['meal_id']);
+    userId = _toInt(json['user_id']);
+    quantity = _toInt(json['quantity']);
+    
+    // معالجة newquantity مع الحفاظ على المنطق الخاص بك
+    newquantity = json['newquantity'] != null 
+        ? _toInt(json['newquantity']) 
+        : _toInt(json['quantity']);
+
+    // استخدام _toDouble للحقول العشرية بشكل آمن
+    oldMealPrice = _toDouble(json['old_meal_price']);
+    price = _toDouble(json['price']);
+    oldPrice = _toDouble(json['old_price']);
+
     createdAt = json['created_at']?.toString();
     updatedAt = json['updated_at']?.toString();
 
-    orderId = json['order_id'];
-    variantId = json['variant_id'];
+    orderId = _toInt(json['order_id']);
+    variantId = _toInt(json['variant_id']);
+
     meal = json['meal'] != null ? new MealModel.fromJson(json['meal']) : null;
+    
     if (json['additional_items'] != null) {
       additionalItems = <AdditionalsModel>[];
       json['additional_items'].forEach((v) {
         additionalItems!.add(new AdditionalsModel.fromJson(v));
       });
     }
-    // store =
-    //     json['store'] != null ? new MyStoreModel.fromJson(json['store']) : null;
+
     variant = json['variant'] != null
         ? new MealVariants.fromJson(json['variant'])
         : null;
@@ -85,16 +87,26 @@ class CartModel {
     //data['price'] = this.price;
     data['old_price'] = this.oldPrice;
     data['variant_id'] = this.variantId;
-    //data['created_at'] = this.createdAt;
-    //data['updated_at'] = this.updatedAt;
-    //data['order_id'] = this.orderId;
-    // if (this.meal != null) {
-    //   data['meal'] = this.meal!.toJson();
-    // }
     if (this.additionalItems != null) {
       data['additional_items'] =
           this.additionalItems!.map((v) => v.toJson()).toList();
     }
     return data;
+  }
+
+  // دوال التحويل الآمنة
+  int? _toInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    if (value is double) return value.toInt();
+    return null;
+  }
+
+  double? _toDouble(dynamic value) {
+    if (value == null) return null; // عدلتها لترجع null إذا كانت القيمة null للحفاظ على دقة البيانات
+    if (value is num) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
   }
 }

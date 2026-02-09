@@ -19,14 +19,14 @@ class NotificationModel {
       this.updatedAt});
 
   NotificationModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    type = json['type'];
-    notifiableType = json['notifiable_type'];
-    notifiableId = json['notifiable_id'];
+    id = json['id']?.toString();
+    type = json['type']?.toString();
+    notifiableType = json['notifiable_type']?.toString();
+    notifiableId = _toInt(json['notifiable_id']); // تحويل آمن
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
-    readAt = json['read_at'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    readAt = json['read_at']?.toString();
+    createdAt = json['created_at']?.toString();
+    updatedAt = json['updated_at']?.toString();
   }
 
   Map<String, dynamic> toJson() {
@@ -42,6 +42,14 @@ class NotificationModel {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;
+  }
+
+  int? _toInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    if (value is double) return value.toInt();
+    return null;
   }
 }
 
@@ -64,30 +72,34 @@ class Data {
       this.storeId});
 
   Data.fromJson(Map<String, dynamic> json) {
-    userId = json['user_id'];
-    status = json['status'];
-    if (json['store_id'] is int) {
-      storeId = json['store_id'];
-    } else if (json['store_id'] is String) {
-      storeId = int.tryParse(json['store_id']) ?? 0;
-    } else {
-      storeId = 0;
-    }
-    title = json['title'];
-    body = json['body'];
-    type = json['type'];
-    icon = json['icon'];
+    userId = _toInt(json['user_id']); // تحويل آمن
+    status = json['status']?.toString();
+    // استبدال كود التحويل اليدوي بـ _toInt ليكون أكثر استقراراً
+    storeId = _toInt(json['store_id']);
+    title = json['title']?.toString();
+    body = json['body']?.toString();
+    type = json['type']?.toString();
+    icon = json['icon']?.toString();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['user_id'] = this.userId;
     data['status'] = this.status;
-    data['storeId'] = this.storeId;
+    data['store_id'] =
+        this.storeId; // تم تعديلها لتطابق التسمية التقليدية إذا لزم الأمر
     data['title'] = this.title;
     data['body'] = this.body;
     data['type'] = this.type;
     data['icon'] = this.icon;
     return data;
+  }
+
+  int? _toInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    if (value is double) return value.toInt();
+    return null;
   }
 }

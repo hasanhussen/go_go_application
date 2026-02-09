@@ -23,20 +23,21 @@ class CouponModel {
       this.updatedAt});
 
   CouponModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    discount = json['discount'];
-    count = json['count'];
-    notes = json['notes'];
-    details = json['details'];
-    validFrom = json['valid_from'];
-    validTo = json['valid_to'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    id = _toInt(json['id']); // تحويل آمن
+    name = json['name']?.toString();
+    discount = _toInt(
+        json['discount']); // تحويل آمن (غالباً ما يأتي كـ String من السيرفر)
+    count = _toInt(json['count']); // تحويل آمن
+    notes = json['notes']?.toString();
+    details = json['details']?.toString();
+    validFrom = json['valid_from']?.toString();
+    validTo = json['valid_to']?.toString();
+    createdAt = json['created_at']?.toString();
+    updatedAt = json['updated_at']?.toString();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['name'] = this.name;
     data['discount'] = this.discount;
@@ -48,5 +49,14 @@ class CouponModel {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;
+  }
+
+  // دوال التحويل الآمنة لضمان استقرار الأنواع
+  int? _toInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    if (value is double) return value.toInt();
+    return null;
   }
 }

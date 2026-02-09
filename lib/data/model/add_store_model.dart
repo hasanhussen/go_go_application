@@ -29,40 +29,46 @@ class AddStoreModel {
       this.id});
 
   AddStoreModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    companyType = json['company_type'];
-    userId = json['user_id'];
-    cityId = json['city_id'];
-    delivery = json['delivery'];
-    image = json['image'];
-    address = json['address'];
-
-    cover = json['cover'];
-    special = json['special'];
-    phone = json['phone'];
-
-    updatedAt = json['updated_at'];
-    createdAt = json['created_at'];
-    id = json['id'];
+    name = json['name']?.toString();
+    companyType = json['company_type']?.toString();
+    userId = _toInt(json['user_id']); // تحويل آمن لـ int
+    cityId =
+        json['city_id']?.toString(); // تحويل آمن لـ String في حال جاء رقماً
+    delivery = json['delivery']?.toString();
+    image = json['image']?.toString();
+    address = json['address']?.toString();
+    cover = json['cover']?.toString();
+    special = json['special']?.toString();
+    phone = json['phone']?.toString();
+    updatedAt = json['updated_at']?.toString();
+    createdAt = json['created_at']?.toString();
+    id = _toInt(json['id']); // تحويل آمن لـ int
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['company_type'] = this.companyType;
-    data['user_id'] = this.userId;
-    data['city_id'] = this.cityId;
-    data['delivery'] = this.delivery;
-    data['image'] = this.image;
-
-    data['cover'] = this.cover;
-    data['special'] = this.special;
-    data['phone'] = this.phone;
-
-    data['address'] = this.address;
-    data['updated_at'] = this.updatedAt;
-    data['created_at'] = this.createdAt;
-    data['id'] = this.id;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['company_type'] = companyType;
+    data['user_id'] = userId;
+    data['city_id'] = cityId;
+    data['delivery'] = delivery;
+    data['image'] = image;
+    data['cover'] = cover;
+    data['special'] = special;
+    data['phone'] = phone;
+    data['address'] = address;
+    data['updated_at'] = updatedAt;
+    data['created_at'] = createdAt;
+    data['id'] = id;
     return data;
+  }
+
+  // دوال التحويل الآمنة
+  int? _toInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    if (value is double) return value.toInt();
+    return null;
   }
 }

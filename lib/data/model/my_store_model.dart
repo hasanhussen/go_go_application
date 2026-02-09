@@ -55,39 +55,46 @@ class MyStoreModel {
       this.updatedAt});
 
   MyStoreModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    userId = json['user_id'];
-    companyType = json['company_type'];
-    cityId = json['city_id'];
-    delivery = json['delivery'];
-    image = json['image'];
-    cover = json['cover'];
-    special = json['special'];
-    rejectionReason = json['delete_reason'];
-    banReason = json['ban_reason'];
-    appeal = json['appeal'];
-    banUntil = json['ban_until'];
-    address = json['address'];
-    followers = json['followers'];
-    totalRatings = json['total_ratings'];
-    bayesianScore = json['bayesian_score'] != null
-        ? (json['bayesian_score'] as num).toDouble()
-        : 0.0;
-    x = json['x'];
-    y = json['y'];
-    phone = json['phone'];
-    status = json['status'];
+    id = _toInt(json['id']);
+    name = json['name']?.toString();
+    userId = _toInt(json['user_id']);
+    companyType = _toInt(json['company_type']);
+    cityId = _toInt(json['city_id']);
+    delivery = json['delivery']?.toString();
+    image = json['image']?.toString();
+    cover = json['cover']?.toString();
+    special = json['special']?.toString();
+    rejectionReason = json['delete_reason']?.toString();
+    banReason = json['ban_reason']?.toString();
+    appeal = json['appeal']?.toString();
+    banUntil = json['ban_until']?.toString();
+    address = json['address']?.toString();
+    followers = _toInt(json['followers']);
+    totalRatings = _toInt(json['total_ratings']);
+    bayesianScore = _toDouble(json['bayesian_score']);
+    x = json['x']?.toString();
+    y = json['y']?.toString();
+    phone = json['phone']?.toString();
+    status = json['status']?.toString();
+
     if (json['working_hours'] != null) {
       workingHours = <WorkingHours>[];
       json['working_hours'].forEach((v) {
         workingHours!.add(new WorkingHours.fromJson(v));
       });
     }
-    isOpenNow = json['is_open_now'];
-    deletedAt = json['deleted_at'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+
+    // تأمين حقل bool في حال جاء كـ int من السيرفر
+    if (json['is_open_now'] is bool) {
+      isOpenNow = json['is_open_now'];
+    } else if (json['is_open_now'] != null) {
+      isOpenNow = json['is_open_now'].toString() == '1' ||
+          json['is_open_now'].toString() == 'true';
+    }
+
+    deletedAt = json['deleted_at']?.toString();
+    createdAt = json['created_at']?.toString();
+    updatedAt = json['updated_at']?.toString();
   }
 
   Map<String, dynamic> toJson() {
@@ -121,6 +128,21 @@ class MyStoreModel {
     data['updated_at'] = this.updatedAt;
     return data;
   }
+
+  int? _toInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    if (value is double) return value.toInt();
+    return null;
+  }
+
+  double? _toDouble(dynamic value) {
+    if (value == null) return null;
+    if (value is num) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
+  }
 }
 
 class WorkingHours {
@@ -128,18 +150,16 @@ class WorkingHours {
   String? day;
   String? openAt;
   String? closeAt;
-  // int? isOpen;
   int? is24;
 
   WorkingHours({this.id, this.day, this.openAt, this.closeAt, this.is24});
 
   WorkingHours.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    day = json['day'];
-    openAt = json['open_at'];
-    closeAt = json['close_at'];
-    // isOpen = json['is_open'];
-    // is24 = json['is_24'];
+    id = _toInt(json['id']); // تأمين حقل id في WorkingHours
+    day = json['day']?.toString();
+    openAt = json['open_at']?.toString();
+    closeAt = json['close_at']?.toString();
+    is24 = _toInt(json['is_24']); // تأمين حقل is24
   }
 
   Map<String, dynamic> toJson() {
@@ -148,8 +168,14 @@ class WorkingHours {
     data['day'] = this.day;
     data['open_at'] = this.openAt;
     data['close_at'] = this.closeAt;
-    // data['is_open'] = this.isOpen;
-    // data['is_24'] = this.is24;
+    data['is_24'] = this.is24;
     return data;
+  }
+
+  int? _toInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    return null;
   }
 }
