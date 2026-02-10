@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_go/core/class/statusrequest.dart';
 import 'package:go_go/core/constant/approute.dart';
 import 'package:go_go/core/functions/handingdatacontroller.dart';
-//import 'package:go_go/data/datasource/remote/forgetpassword/checkemail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:go_go/data/datasource/remote/forgetpassword/checkemail.dart';

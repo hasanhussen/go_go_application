@@ -48,34 +48,6 @@ class OrdersPendingController extends GetxController {
     Get.toNamed(AppRoute.ordersarchive);
   }
 
-  // getOrders() async {
-  //   processingOrders.clear();
-  //   statusRequest = StatusRequest.loading;
-  //   update();
-  //   var response = await ordersPendingData.getOrders();
-  //   print("=============================== Controller $response ");
-  //   statusRequest = handlingData(response);
-  //   if (StatusRequest.success == statusRequest) {
-  //     // Start backend
-  //     processingOrders.addAll((response['processingOrders'] as List)
-  //         .map((e) => OrderModel.fromJson(e)));
-  //     archiveOrders.addAll((response['completedOrders'] as List)
-  //         .map((e) => OrderModel.fromJson(e)));
-  //     rejectedOrders.addAll((response['rejectedOrders'] as List)
-  //         .map((e) => OrderModel.fromJson(e)));
-  //     waitingOrders.addAll((response['waitingOrders'] as List)
-  //         .map((e) => OrderModel.fromJson(e)));
-
-  //     // processingOrders
-  //     //     .addAll((response as List).map((e) => OrderModel.fromJson(e)));
-
-  //     // End
-  //   } else {
-  //     statusRequest = StatusRequest.failure;
-  //   }
-  //   update();
-  // }
-
   getOrders() async {
     processingOrders.clear();
     statusRequest = StatusRequest.loading;
@@ -157,46 +129,6 @@ class OrdersPendingController extends GetxController {
     }
     update();
   }
-
-  // getarchiveOrders() async {
-  //   archiveOrders.clear();
-  //   statusRequest = StatusRequest.loading;
-  //   update();
-  //   var response = await ordersPendingData.getCompleted();
-  //   print("=============================== Controller $response ");
-  //   statusRequest = handlingData(response);
-  //   if (StatusRequest.success == statusRequest) {
-  //     // Start backend
-
-  //     archiveOrders
-  //         .addAll((response as List).map((e) => OrderModel.fromJson(e)));
-
-  //     // End
-  //   } else {
-  //     statusRequest = StatusRequest.failure;
-  //   }
-  //   update();
-  // }
-
-  // getRejectedOrders() async {
-  //   rejectedOrders.clear();
-  //   statusRequest = StatusRequest.loading;
-  //   update();
-  //   var response = await ordersPendingData.getRejected();
-  //   print("=============================== Controller $response ");
-  //   statusRequest = handlingData(response);
-  //   if (StatusRequest.success == statusRequest) {
-  //     // Start backend
-
-  //     rejectedOrders
-  //         .addAll((response as List).map((e) => OrderModel.fromJson(e)));
-
-  //     // End
-  //   } else {
-  //     statusRequest = StatusRequest.failure;
-  //   }
-  //   update();
-  // }
 
   deleteOrder(String orderid) async {
     //data.clear();

@@ -92,70 +92,7 @@ class MyDeliveryController extends GetxController {
     }
     update();
   }
-
-  // getmyDeliveryOrders() async {
-  //   myDeliveryOrders.clear();
-  //   statusRequest = StatusRequest.loading;
-  //   gettoken();
-  //   update();
-  //   var response = await mydeliveryData.getProcessing();
-  //   print("=============================== Controller $response ");
-  //   statusRequest = handlingData(response);
-  //   if (StatusRequest.success == statusRequest) {
-  //     // Start backend
-
-  //     myDeliveryOrders
-  //         .addAll((response as List).map((e) => OrderModel.fromJson(e)));
-
-  //     // End
-  //   } else {
-  //     statusRequest = StatusRequest.failure;
-  //   }
-  //   update();
-  // }
-
-  // getNewDeliveryOrders() async {
-  //   newDeliveryOrders.clear();
-  //   statusRequest = StatusRequest.loading;
-  //   gettoken();
-  //   update();
-  //   var response = await mydeliveryData.getwaiting();
-  //   print("=============================== Controller $response ");
-  //   statusRequest = handlingData(response);
-  //   if (StatusRequest.success == statusRequest) {
-  //     // Start backend
-
-  //     newDeliveryOrders
-  //         .addAll((response as List).map((e) => OrderModel.fromJson(e)));
-
-  //     // End
-  //   } else {
-  //     statusRequest = StatusRequest.failure;
-  //   }
-  //   update();
-  // }
-
-  // getcompletedDeliveryOrders() async {
-  //   completedDeliveryOrders.clear();
-  //   statusRequest = StatusRequest.loading;
-  //   gettoken();
-  //   update();
-  //   var response = await mydeliveryData.getCompleted();
-  //   print("=============================== Controller $response ");
-  //   statusRequest = handlingData(response);
-  //   if (StatusRequest.success == statusRequest) {
-  //     // Start backend
-
-  //     completedDeliveryOrders
-  //         .addAll((response as List).map((e) => OrderModel.fromJson(e)));
-
-  //     // End
-  //   } else {
-  //     statusRequest = StatusRequest.failure;
-  //   }
-  //   update();
-  // }
-
+  
   getOrderDetails(
       String id, String orderStatus, List<CartModel> cartItems) async {
     statusRequest = StatusRequest.loading;

@@ -10,21 +10,6 @@ class MyStoresData {
     return response.fold((l) => l, (r) => r);
   }
 
-  // getActiveStores() async {
-  //   var response = await crud.getData(AppLink.myActiveStores);
-  //   return response.fold((l) => l, (r) => r);
-  // }
-
-  // getNewStores() async {
-  //   var response = await crud.getData(AppLink.myNewStores);
-  //   return response.fold((l) => l, (r) => r);
-  // }
-
-  // getDeletedStores() async {
-  //   var response = await crud.getData(AppLink.myDeletedStores);
-  //   return response.fold((l) => l, (r) => r);
-  // }
-
   sendAppeal(int storeId, String reason) async {
     var response = await crud
         .postData(AppLink.sendStoreAppeal + '/' + storeId.toString(), {

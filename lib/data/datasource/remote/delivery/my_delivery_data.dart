@@ -10,21 +10,6 @@ class MyDeliveryData {
     return response.fold((l) => l, (r) => r);
   }
 
-  // getProcessing() async {
-  //   var response = await crud.getData(AppLink.pendingDeliveryorders);
-  //   return response.fold((l) => l, (r) => r);
-  // }
-
-  // getCompleted() async {
-  //   var response = await crud.getData(AppLink.ordersDeliveryarchive);
-  //   return response.fold((l) => l, (r) => r);
-  // }
-
-  // getwaiting() async {
-  //   var response = await crud.getData(AppLink.ordersDeliverywaiting);
-  //   return response.fold((l) => l, (r) => r);
-  // }
-
   getDetails(String orderid) async {
     var response = await crud.getData('${AppLink.ordersdetails}/$orderid');
     return response.fold((l) => l, (r) => r);

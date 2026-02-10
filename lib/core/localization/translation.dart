@@ -159,6 +159,12 @@ class MyTranslation extends Translations {
           "153": "من نحن",
           "154": "تم  تحديث حالة الطلب ",
           "155": "المتاجر المُتابعة",
+          "156": " لم يتم الموافقة على الحساب بعد",
+          "157": "تحـذير",
+          "158": "الفعّالة",
+          "159": "بانتظار الموافقة",
+          "160": "المحظورة",
+          "161": "مرفوضة / محذوفة",
         },
         "en": {
           "1": "Choose Language",
@@ -317,6 +323,12 @@ class MyTranslation extends Translations {
           "153": "About Us",
           "154": "Order status updated",
           "155": "Followed stores",
+          "156": "The account has not been approved yet",
+          "157": "ُWarning",
+          "158": "Active",
+          "159": "Pending Approval",
+          "160": "Blocked",
+          "161": "Rejected / Deleted",
         }
       };
 }

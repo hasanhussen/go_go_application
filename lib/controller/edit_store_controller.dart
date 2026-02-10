@@ -260,19 +260,6 @@ class EditStoreController extends GetxController {
       workingHours,
     );
     Get.back();
-
-    // else {
-    //   response = await editstoreData.editDatawithfile(
-    //       Get.arguments['id'],
-    //       nameController!.text,
-    //       addressController!.text,
-    //       phoneController!.text,
-    // specialController!.text,
-    //       Get.arguments['image'],
-    //       logoImage!);
-    //   Get.back();
-    // }
-
     print("=============================== Controller $response ");
 
     statusRequest = handlingData(response);

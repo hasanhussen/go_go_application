@@ -78,56 +78,12 @@ class MyStoresController extends GetxController {
       blockedStores.addAll((response['banned_stores'] as List)
           .map((e) => MyStoreModel.fromJson(e)));
 
-      // activeStores = stores.where((s) => s.status == '1').toList();
-      // blockedStores = stores.where((s) => s.status == '2').toList();
-
       // End
     } else {
       statusRequest = StatusRequest.failure;
     }
     update();
   }
-
-  // getNewStores() async {
-  //   newStores.clear();
-  //   statusRequest = StatusRequest.loading;
-  //   gettoken();
-  //   update();
-  //   var response = await myStoresData.getNewStores();
-  //   print("=============================== Controller $response ");
-  //   statusRequest = handlingData(response);
-  //   if (StatusRequest.success == statusRequest) {
-  //     // Start backend
-
-  //     newStores.addAll((response as List).map((e) => MyStoreModel.fromJson(e)));
-
-  //     // End
-  //   } else {
-  //     statusRequest = StatusRequest.failure;
-  //   }
-  //   update();
-  // }
-
-  // getDeletedStores() async {
-  //   deletedStores.clear();
-  //   statusRequest = StatusRequest.loading;
-  //   gettoken();
-  //   update();
-  //   var response = await myStoresData.getDeletedStores();
-  //   print("=============================== Controller $response ");
-  //   statusRequest = handlingData(response);
-  //   if (StatusRequest.success == statusRequest) {
-  //     // Start backend
-
-  //     deletedStores
-  //         .addAll((response as List).map((e) => MyStoreModel.fromJson(e)));
-
-  //     // End
-  //   } else {
-  //     statusRequest = StatusRequest.failure;
-  //   }
-  //   update();
-  // }
 
   deletestore(int id) async {
     statusRequest = StatusRequest.loading;

@@ -252,23 +252,7 @@ class AddStoreScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 30),
-                    // Row(
-                    //   children: [
-                    //     Checkbox(
-                    //         value: controller.hasDelivery,
-                    //         onChanged: controller.toggleDelivery),
-                    //     Text("100".tr)
-                    //   ],
-                    // ),
-                    // Row(
-                    //   children: [
-                    //     Checkbox(
-                    //         value: controller.isOnline,
-                    //         onChanged: controller.toggleOnline),
-                    //     Text("101".tr)
-                    //   ],
-                    // ),
-                    // const SizedBox(height: 20),
+                   
                     Text("102".tr,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.red)),

@@ -11,17 +11,18 @@ class MyServices extends GetxService {
   String? publishableKey;
   String token = "";
   String status = "";
+  bool statusLoaded = false;
 
   Future<MyServices> init() async {
     // 1. تهيئة Firebase و SharedPreferences (أشياء سريعة وضرورية)
     await Firebase.initializeApp();
     sharedPreferences = await SharedPreferences.getInstance();
-    
+
     gettoken();
 
-    // 2. استدعاء جلب البيانات من السيرفر "بدون await" 
+    // 2. استدعاء جلب البيانات من السيرفر "بدون await"
     // لكي لا يظل التطبيق عالقاً على شاشة سوداء إذا تأخر السيرفر
-    checkApiData(); 
+    checkApiData();
 
     return this;
   }
@@ -44,31 +45,36 @@ class MyServices extends GetxService {
     }
   }
 
-  Future<void> getStatus() async {
-    try {
-      final response = await http.get(
-        Uri.parse("${AppLink.server}/profile"),
-        headers: {
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-        },
-      ).timeout(const Duration(seconds: 10)); // مهلة 10 ثوانٍ فقط
+Future<void> getStatus() async {
+  try {
+    final response = await http.get(
+      Uri.parse("${AppLink.server}/profile"),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    ).timeout(const Duration(seconds: 10));
 
-      if (response.statusCode == 200) {
-        final body = json.decode(response.body);
-        status = body['status'].toString();
-        
-        if (body['email_verified_at'] == null) status = '4';
-        if (body['deleted_at'] != null) status = '3';
-        
-        await sharedPreferences.setString("status", status);
-      } else {
-        status = "error_auth";
-      }
-    } catch (e) {
-      status = "offline";
+    if (response.statusCode == 200) {
+      final body = json.decode(response.body);
+      status = body['status'].toString();
+
+      if (body['email_verified_at'] == null) status = '4';
+      if (body['deleted_at'] != null) status = '3';
+
+      await sharedPreferences.setString("status", status);
+    } else {
+      status = "error_auth";
+      await sharedPreferences.setString("status", status);
     }
+  } catch (e) {
+    status = "offline";
+    await sharedPreferences.setString("status", status);
+  } finally {
+    statusLoaded = true; // ✅ مهم جدًا
   }
+}
+
 
   Future<void> getStripe() async {
     try {

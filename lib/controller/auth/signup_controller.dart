@@ -110,26 +110,6 @@ class SignUpController extends GetxController {
         myServices.sharedPreferences.setString("gender", response['gender']);
         myServices.sharedPreferences.setString("token", response['api_token']);
         myServices.sharedPreferences.setString("step", "2");
-
-        //FirebaseMessaging.instance.subscribeToTopic("users");
-        //FirebaseMessaging.instance.subscribeToTopic("users${userid}");
-
-        // String? fcm_token = await FirebaseMessaging.instance.getToken();
-        // print("✅ FCM Token: $fcm_token");
-        // if (fcm_token != null) {
-        //   var fcmresponse = await http.post(
-        //     Uri.parse(AppLink.saveFcmToken),
-        //     headers: {
-        //       'Authorization': 'Bearer ${response["api_token"]}',
-        //       'Accept': 'application/json',
-        //     },
-        //     body: {'fcm_token': fcm_token},
-        //   );
-        //   print(fcmresponse.body);
-        // }
-
-        // Get.offNamed(AppRoute.verfiyCode,
-        //     arguments: {'email': response['email']});
         Get.snackbar(
           "150".tr,
           "151".tr,
@@ -153,22 +133,6 @@ class SignUpController extends GetxController {
     isPassword = isPassword == true ? false : true;
     update();
   }
-
-  // Future<void> selectDate(BuildContext context) async {
-  //   await showDatePicker(
-  //     context: context,
-  //     initialDate: addselectedDate,
-  //     firstDate: DateTime(1930),
-  //     lastDate: DateTime(2026),
-  //   ).then((pickedDate) {
-  //     if (pickedDate != null && pickedDate != addselectedDate) {
-  //       addselectedDate = pickedDate;
-  //       birthdate.text = DateFormat.yMd().format(addselectedDate);
-  //       hintText = birthdate.text;
-  //     }
-  //   });
-  //   update();
-  // }
 
   @override
   void dispose() {

@@ -191,25 +191,6 @@ class AddStoreController extends GetxController {
     update();
   }
 
-  // String formatTimeOfDay(TimeOfDay t) {
-  //   final hour = t.hour.toString().padLeft(2, '0');
-  //   final minute = t.minute.toString().padLeft(2, '0');
-  //   return "$hour:$minute";
-  // }
-
-  // Map<String, dynamic> getWorkingHoursJson() {
-  //   Map<String, dynamic> data = {};
-
-  //   workingHours.forEach((day, times) {
-  //     data[day] = {
-  //       "from": formatTimeOfDay(times['from']!),
-  //       "to": formatTimeOfDay(times['to']!),
-  //     };
-  //   });
-
-  //   return data;
-  // }
-
   addStore() async {
     if (formstate.currentState!.validate()) {
       statusRequest = StatusRequest.loading;

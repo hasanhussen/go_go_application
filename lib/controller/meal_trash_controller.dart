@@ -187,12 +187,6 @@ class MealTrashController extends GetxController {
     }
   }
 
-  // Future<void> restoreTrashed(String mealId) async {
-  //   await mealData.restoreTrashedMeal(mealId);
-  //   trashedMeals.removeWhere((m) => m['id'].toString() == mealId);
-  //   update();
-  // }
-
   @override
   void onInit() {
     storeId = Get.arguments['storeId'] ?? 0;

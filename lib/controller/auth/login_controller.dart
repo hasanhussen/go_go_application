@@ -20,31 +20,6 @@ class LoginController extends GetxController {
   StatusRequest statusRequest = StatusRequest.none;
   LoginData loginData = LoginData(Get.find());
 
-  // void login() {
-  //   if (formstate.currentState!.validate()) {
-  //     Get.snackbar('نجاح', 'تم تسجيل الدخول بنجاح');
-  //     saveaccount(username.text, password.text);
-  //     Get.offAllNamed(AppRoute.homescreen);
-  //   } else {
-  //     Get.snackbar('خطأ', 'يرجى ملء جميع الحقول');
-  //   }
-  // }
-
-  // saveaccount(String username, String password) async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final key1 = 'name';
-  //   final key2 = 'password';
-  //   final key3 = 'email';
-  //   final key4 = 'email';
-  //   final key5 = 'birthDate';
-
-  //   prefs.setString(key1, username);
-  //   prefs.setString(key2, password);
-  //   prefs.setString(key3, "+963 936593248");
-  //   prefs.setString(key4, "hasan@example.com");
-  //   prefs.setString(key5, "Oct 24, 1980");
-  // }
-
   login() async {
     if (formstate.currentState!.validate()) {
       statusRequest = StatusRequest.loading;
@@ -91,21 +66,8 @@ class LoginController extends GetxController {
         myServices.sharedPreferences.setString("token", response["api_token"]);
         myServices.sharedPreferences.setString("step", "2");
 
-        // FirebaseMessaging.instance.subscribeToTopic("users${userid}");
-
         List<String> roles =
             myServices.sharedPreferences.getStringList("roles") ?? [];
-
-        // if (fcm_token != null) {
-        //   await http.post(
-        //     Uri.parse(AppLink.saveFcmToken),
-        //     headers: {
-        //       'Authorization': 'Bearer ${response["api_token"]}',
-        //       'Accept': 'application/json',
-        //     },
-        //     body: {'fcm_token': fcm_token},
-        //   );
-        // }
 
         if (response['status'] == '1') {
           if (roles.isNotEmpty && roles.contains('delivery')) {
@@ -131,13 +93,13 @@ class LoginController extends GetxController {
         } else if (response['status'] == '0') {
           statusRequest = StatusRequest.none;
           Get.defaultDialog(
-              title: "ُWarning",
-              middleText: "The account has not been approved yet");
+              title: "ُ157".tr,
+              middleText: "156".tr);
           Get.offNamed(AppRoute.login);
           update();
         } else if (response['status'] == '2') {
           statusRequest = StatusRequest.none;
-          Get.defaultDialog(title: "ُWarning", middleText: "Account banned");
+          Get.defaultDialog(title: "ُ157".tr, middleText: "149".tr);
           Get.offNamed(AppRoute.login);
           update();
         } else if (response['message'] == 'account_deleted') {
@@ -151,7 +113,7 @@ class LoginController extends GetxController {
       update();
     } else {
       Get.defaultDialog(
-          title: "ُWarning", middleText: "email Or Password Not Correct");
+          title: "ُ157".tr, middleText: "email Or Password Not Correct");
       statusRequest = StatusRequest.failure;
       update();
     }

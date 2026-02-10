@@ -434,13 +434,6 @@ class EditCartController extends GetxController {
         final CartController cartController = Get.find<CartController>();
         await cartController.getCartItems();
         Get.back();
-        // } else {
-        // Get.offAllNamed(AppRoute.homescreen, arguments: {"page": 3});
-        // final OrdersPendingController ordersPendingController =
-        //     Get.find<OrdersPendingController>();
-        // await ordersPendingController.getOrderDetails(
-        //     orderId ?? '0', orderStatus ?? '0');
-        // Get.back();
         Get.snackbar(
           'نجاح',
           fromOrder

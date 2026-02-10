@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_go/controller/my_stores_controller.dart';
-import 'package:go_go/core/class/handlingdataview.dart';
-import 'package:go_go/core/class/statusrequest.dart';
 import 'package:go_go/data/model/my_store_model.dart';
 import 'package:go_go/view/widgets/mystore/blockedStoreCard.dart';
 import 'package:go_go/view/widgets/mystore/rejectedStoreCard.dart';
 import 'package:go_go/view/widgets/store_card.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
 class MyStoresScreen extends StatelessWidget {
   const MyStoresScreen({super.key});
@@ -22,16 +19,16 @@ class MyStoresScreen extends StatelessWidget {
 
         // قائمة أسماء التابات
         final tabs = [
-          "الفعّالة",
-          "بانتظار الموافقة",
-          "المحظورة",
-          "مرفوضة / محذوفة",
+          "158".tr,
+          "159".tr,
+          "160".tr,
+          "161".tr,
         ];
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text(
-              "متاجري",
+            title: Text(
+              "93".tr,
               style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
             ),
             backgroundColor: Colors.white,

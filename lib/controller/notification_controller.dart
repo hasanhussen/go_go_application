@@ -9,29 +9,6 @@ import 'package:go_go/data/datasource/remote/home/notification_data.dart';
 import 'package:go_go/data/model/notification_model.dart';
 
 class NotificationController extends GetxController {
-  // List<Map<String, dynamic>> notifications = [
-  //   {
-  //     "title": "تم قبول طلبك",
-  //     "message": "طلبك رقم #124 تم قبوله من قبل الإدارة.",
-  //     "date": "اليوم - 10:30 ص",
-  //     "color": 0xFFFFF3E0, // لون مميز
-  //     "icon": "✅",
-  //   },
-  //   {
-  //     "title": "تم تحديث حالة الطلب",
-  //     "message": "طلبك الآن في مرحلة التحضير.",
-  //     "date": "أمس - 05:00 م",
-  //     "color": 0xFFE3F2FD,
-  //     "icon": "🚚",
-  //   },
-  //   {
-  //     "title": "إعلان جديد من الإدارة",
-  //     "message": "عرض خاص هذا الأسبوع! خصم 20٪ على الطلبات الجديدة.",
-  //     "date": "25 أكتوبر 2025 - 09:15 ص",
-  //     "color": 0xFFFCE4EC,
-  //     "icon": "📢",
-  //   },
-  // ];
 
   StatusRequest statusRequest = StatusRequest.none;
   NotificationData notificationData = NotificationData(Get.find());

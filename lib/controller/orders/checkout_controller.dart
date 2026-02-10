@@ -772,34 +772,6 @@ class CheckoutController extends GetxController {
 
   deletorderItem(int cartMealId, {int? cartVariantId}) async {
     if (fromOrder) {
-      // statusRequest = StatusRequest.loading;
-      // gettoken();
-      // update();
-      // print("=============================== Controller");
-      // var response = await cartData.deleteItem(cartId);
-      // print("=============================== Controller $response ");
-      // statusRequest = handlingData(response);
-      // if (response is Map && response['error'] != null) {
-      //   statusRequest = StatusRequest.failure;
-      //   Get.defaultDialog(
-      //     title: "خطأ",
-      //     titleStyle: const TextStyle(
-      //       fontWeight: FontWeight.bold,
-      //       fontSize: 18,
-      //       color: Colors.red,
-      //     ),
-      //     middleText: response['error'],
-      //     middleTextStyle: const TextStyle(fontSize: 16),
-      //     backgroundColor: Colors.white,
-      //     radius: 12,
-      //     buttonColor: Colors.red,
-      //     textCancel: "إغلاق",
-      //     cancelTextColor: Colors.black,
-      //     onCancel: () {},
-      //   );
-      //   update();
-      //   return;
-      // }
       CartModel? cartItem = cartItems.firstWhereOrNull((item) =>
           item.mealId == cartMealId && item.variantId == cartVariantId);
       if (cartItem != null) {
@@ -866,25 +838,6 @@ class CheckoutController extends GetxController {
       amount = double.tryParse(
               (data['new_amount'] ?? data['capture_with_amount']).toString()) ??
           0;
-
-      // // فحص الحقول المهمة
-      // if (clientSecret.isEmpty) {
-      //   isLoading = false;
-      //   update();
-      //   Get.snackbar('خطأ', 'حدث خطأ: clientSecret فارغ!');
-      //   return;
-      // }
-
-      // if (paymentIntentId.isEmpty) {
-      //   isLoading = false;
-      //   update();
-      //   Get.snackbar('خطأ', 'حدث خطأ: paymentIntentId فارغ!');
-      //   return;
-      // }
-
-      // print('clientSecret="$clientSecret"');
-      // print('paymentIntentId="$paymentIntentId"');
-      // print('amount=$amount');
 
       // 2) تهيئة Stripe
       final publishableKey = myServices.publishableKey;

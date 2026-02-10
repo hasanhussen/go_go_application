@@ -80,11 +80,7 @@ class OrdersArchice extends GetView<OrdersArchiveController> {
                       ),
                     ),
 
-                    //  ListView.builder(
-                    //   itemCount: controller.archiveOrders.length,
-                    //   itemBuilder: ((context, index) => CardOrdersList(
-                    //       listdata: controller.archiveOrders[index])),
-                    // )
+                   
                   ))),
         ));
   }

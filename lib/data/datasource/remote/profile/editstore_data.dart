@@ -9,18 +9,6 @@ import 'package:go_go/linkapi.dart';
 class EditstoreData {
   Crud crud;
   EditstoreData(this.crud);
-  // editData(String id, String name, String address, String phone, String special,
-  //     String type, String cityId, String delivery) async {
-  //   var response = await crud.postData(AppLink.editstore + '/' + id, {
-  //     "name": name,
-  //     "address": address,
-  //     "category_id": type,
-  //     "city_id": cityId,
-  //     "delivery": delivery,
-  //   });
-  //   return response.fold((l) => l, (r) => r);
-  // }
-
   editData(
     String id,
     String name,
@@ -83,17 +71,5 @@ class EditstoreData {
     response = await crud.postData(AppLink.editstore + '/' + id, data);
 
     return response.fold((l) => l, (r) => r);
-
-    // var response = await crud.addRequestWithImageOne(
-    //     AppLink.editstore,
-    //     {
-    //       "name": name,
-    //       "address": address,
-    //       "category_id": type,
-    //       "city_id": cityId,
-    //       "delivery": delivery,
-    //     },
-    //     image);
-    // return response.fold((l) => l, (r) => r);
   }
 }

@@ -64,24 +64,7 @@ class SignUp extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(height: 60),
-                              // Stack(
-                              //   children: [
-                              //     CircleAvatar(
-                              //       radius: 40,
-                              //       backgroundColor: Colors.white,
-                              //     ),
-                              //     Positioned(
-                              //       bottom: 0,
-                              //       right: 0,
-                              //       child: CircleAvatar(
-                              //         radius: 12,
-                              //         backgroundColor: Colors.green,
-                              //         child: Icon(Icons.add,
-                              //             color: Colors.white, size: 16),
-                              //       ),
-                              //     ),
-                              //   ],
-                              // ),
+                              
                               SizedBox(height: 20),
                               CustomTextField(
                                 hint: '21'.tr,
@@ -121,18 +104,7 @@ class SignUp extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              // CustomTextField(
-                              //   readOnly: true,
-                              //   hint: controller.hintText,
-                              //   icon: Icons.calendar_today,
-                              //   controller: controller.birthdate,
-                              //   valid: (val) {
-                              //     return validInput(val!, 3, 40, "birthdate");
-                              //   },
-                              //   onPressed: () {
-                              //     controller.selectDate(context);
-                              //   },
-                              // ),
+                            
                               SizedBox(height: 40),
                               GetBuilder<SignUpController>(
                                 builder: (controller) => Column(

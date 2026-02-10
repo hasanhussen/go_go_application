@@ -49,16 +49,6 @@ class EditMealController extends GetxController {
   List<TextEditingController> variantPriceControllers = [];
   List<TextEditingController> variantQuantityControllers = [];
 
-// اختيار صورة
-  //final ImagePicker _picker = ImagePicker();
-  // Future<void> pickImage() async {
-  //   final image = await _picker.pickImage(source: ImageSource.gallery);
-  //   if (image != null) {
-  //     selectedImage = image;
-  //     update();
-  //   }
-  // }
-
   Future pickImage() async {
     final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (picked != null) {
