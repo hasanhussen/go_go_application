@@ -1,7 +1,6 @@
 class AppLink {
-  static const String imageststatic =
-      'https://hasanhuseinprojects.site/storage';
-  static const String server = 'https://hasanhuseinprojects.site/api';
+  static const String imageststatic = 'http://192.168.1.7:8000/storage';
+  static const String server = 'http://192.168.1.7:8000/api';
 //========================== Image ============================
   static const String imagestCategories = "$imageststatic/categories";
   static const String imagestItems = "$imageststatic/items";
