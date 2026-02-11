@@ -165,6 +165,7 @@ class MyTranslation extends Translations {
           "159": "بانتظار الموافقة",
           "160": "المحظورة",
           "161": "مرفوضة / محذوفة",
+          "162": "هل هذا حساب تاجر؟"
         },
         "en": {
           "1": "Choose Language",
@@ -329,6 +330,7 @@ class MyTranslation extends Translations {
           "159": "Pending Approval",
           "160": "Blocked",
           "161": "Rejected / Deleted",
+          "162": "Is this a vendor account?"
         }
       };
 }

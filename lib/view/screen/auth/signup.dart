@@ -147,7 +147,7 @@ class SignUp extends StatelessWidget {
                                           },
                                         ),
                                         Text(
-                                          "هل هذا حساب تاجر؟",
+                                          "162".tr,
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 16),

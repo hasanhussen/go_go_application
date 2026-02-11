@@ -34,7 +34,7 @@ class MyServices extends GetxService {
   }
 
   // دالة تجمع طلبات الشبكة وتنفذها في الخلفية
-  void checkApiData() async {
+  Future<void> checkApiData() async {
     try {
       if (token.isNotEmpty) {
         await getStatus();
@@ -42,6 +42,8 @@ class MyServices extends GetxService {
       await getStripe();
     } catch (e) {
       print("Background Data Fetch Error: $e");
+    } finally {
+      statusLoaded = true;
     }
   }
 
@@ -63,6 +65,7 @@ Future<void> getStatus() async {
       if (body['deleted_at'] != null) status = '3';
 
       await sharedPreferences.setString("status", status);
+      print('Status set to: $status');
     } else {
       status = "error_auth";
       await sharedPreferences.setString("status", status);
@@ -70,9 +73,7 @@ Future<void> getStatus() async {
   } catch (e) {
     status = "offline";
     await sharedPreferences.setString("status", status);
-  } finally {
-    statusLoaded = true; // ✅ مهم جدًا
-  }
+  } 
 }
 
 

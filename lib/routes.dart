@@ -28,6 +28,7 @@ import 'package:go_go/view/screen/orders/check_out.dart';
 import 'package:go_go/view/screen/orders/pending.dart';
 import 'package:go_go/view/screen/resturant_list_screen.dart';
 import 'package:go_go/view/screen/resturant_profile.dart';
+import 'package:go_go/view/screen/splash_screen.dart';
 import 'package:go_go/view/screen/support_page.dart';
 import 'package:go_go/view/screen/welcome_screen.dart';
 import 'package:go_go/view/screen/language_edit.dart';
@@ -35,7 +36,9 @@ import 'package:go_go/view/widgets/profile/wallet.dart';
 
 List<GetPage<dynamic>>? routes = [
   GetPage(
-      name: "/", page: () => WelcomeScreen(), middlewares: [MyMiddleWare()]),
+      name: "/", page: () => SplashView()),
+  GetPage(
+      name: "/welcome", page: () => WelcomeScreen(), middlewares: [MyMiddleWare()]),
   GetPage(name: AppRoute.signUp, page: () => SignUp()),
   GetPage(name: AppRoute.login, page: () => Login()),
   GetPage(name: AppRoute.forgetPassword, page: () => const ForgetPassword()),

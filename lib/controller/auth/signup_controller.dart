@@ -109,7 +109,7 @@ class SignUpController extends GetxController {
         myServices.sharedPreferences.setString("status", response['status']);
         myServices.sharedPreferences.setString("gender", response['gender']);
         myServices.sharedPreferences.setString("token", response['api_token']);
-        myServices.sharedPreferences.setString("step", "2");
+        // myServices.sharedPreferences.setString("step", "2");
         Get.snackbar(
           "150".tr,
           "151".tr,
